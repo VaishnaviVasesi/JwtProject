@@ -16,7 +16,7 @@ public class Cart {
     @JsonIgnore
     private User user;
 
-    @OneToMany(fetch=FetchType.EAGER,mappedBy = "cart")
+    @OneToMany(fetch=FetchType.EAGER,mappedBy = "cart", cascade = CascadeType.ALL)
     private List<CartProduct> cartProducts;
 
     public Cart(){

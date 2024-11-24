@@ -1,7 +1,6 @@
 package com.wings.ecommerce.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.springframework.security.core.userdetails.User;
 
 import javax.persistence.*;
 
