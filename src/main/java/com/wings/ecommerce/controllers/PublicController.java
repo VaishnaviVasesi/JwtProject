@@ -1,11 +1,12 @@
 package com.wings.ecommerce.controllers;
 
 import com.wings.ecommerce.models.Product;
+import com.wings.ecommerce.repo.ProductRepo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.util.CollectionUtils;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -13,9 +14,15 @@ import java.util.List;
 @RequestMapping("/api/public")
 public class PublicController {
 
+    @Autowired
+    private ProductRepo productRepo;
     @GetMapping("/product/search")
-    public List<Product> getProducts(){
-        return null;
+    public ResponseEntity<?> getProducts(@RequestParam String keyword){
+        List<Product> list = productRepo.findByProductNameContainingIgnoreCaseOrCategoryCategoryNameContainingIgnoreCase(keyword,keyword);
+        if(CollectionUtils.isEmpty(list)){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(list);
     }
 
     @PostMapping("/login")

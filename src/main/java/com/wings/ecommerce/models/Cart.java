@@ -1,7 +1,6 @@
 package com.wings.ecommerce.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.springframework.security.core.userdetails.User;
 
 import javax.persistence.*;
 import java.util.List;
@@ -25,9 +24,8 @@ public class Cart {
         super();
     }
 
-    public Cart(Integer cartId, Double totalAmount, User user, List<CartProduct> cartProducts) {
+    public Cart(Double totalAmount, User user, List<CartProduct> cartProducts) {
         super();
-        this.cartId = cartId;
         this.totalAmount = totalAmount;
         this.user = user;
         this.cartProducts = cartProducts;
